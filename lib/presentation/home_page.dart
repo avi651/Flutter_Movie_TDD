@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/response/response.dart' as response;
 import 'package:movie_app/shared/network/dio_network_service.dart';
+import 'package:movie_app/shared/network/end_points.dart';
 import 'package:movie_app/shared/util/app_exceptions.dart';
 
 class HomePageView extends StatelessWidget {
@@ -19,7 +20,7 @@ class HomePageView extends StatelessWidget {
             onPressed: () async {
               // Test GET request
               final Either<AppException, response.Response> result =
-                  await dioService.get('https://jsonplaceholder.typicode.com/todos/1');
+                  await dioService.get(EndPoints.popular);
 
               result.fold(
                 (exception) => print('Error: ${exception.message}'),
