@@ -1,14 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 import 'package:movie_app/models/movie.dart';
 
 part 'movies.freezed.dart';
+
 part 'movies.g.dart';
 
 @freezed
+@Collection(ignore: {'copyWith'})
 class Movies with _$Movies {
+  const Movies._();
   @JsonSerializable(explicitToJson: true)
   const factory Movies({
-    @Default(0) int id,
+    @Default(Isar.autoIncrement) int id,
     @Default([]) List<Movie> movies,
     @Default('') String type,
     @Default(0) int page,
@@ -17,5 +21,6 @@ class Movies with _$Movies {
     @Default(false) bool cached,
   }) = _Movies;
 
-  factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
+  @override
+  Id get id;
 }

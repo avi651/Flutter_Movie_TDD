@@ -1,9 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
+
 part 'movie.freezed.dart';
+
 part 'movie.g.dart';
 
 
 @freezed
+@Embedded(ignore: {'copyWith'})
 class Movie with _$Movie {
   @JsonSerializable(explicitToJson: true)
   const factory Movie(

@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Movies _$MoviesFromJson(Map<String, dynamic> json) {
-  return _Movies.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Movies {
   int get id => throw _privateConstructorUsedError;
@@ -28,7 +24,6 @@ mixin _$Movies {
   int get totalResults => throw _privateConstructorUsedError;
   bool get cached => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MoviesCopyWith<Movies> get copyWith => throw _privateConstructorUsedError;
 }
@@ -174,19 +169,17 @@ class __$$MoviesImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$MoviesImpl implements _Movies {
+class _$MoviesImpl extends _Movies {
   const _$MoviesImpl(
-      {this.id = 0,
+      {this.id = Isar.autoIncrement,
       final List<Movie> movies = const [],
       this.type = '',
       this.page = 0,
       this.totalPages = 0,
       this.totalResults = 0,
       this.cached = false})
-      : _movies = movies;
-
-  factory _$MoviesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MoviesImplFromJson(json);
+      : _movies = movies,
+        super._();
 
   @override
   @JsonKey()
@@ -237,7 +230,6 @@ class _$MoviesImpl implements _Movies {
             (identical(other.cached, cached) || other.cached == cached));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -254,16 +246,9 @@ class _$MoviesImpl implements _Movies {
   @pragma('vm:prefer-inline')
   _$$MoviesImplCopyWith<_$MoviesImpl> get copyWith =>
       __$$MoviesImplCopyWithImpl<_$MoviesImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MoviesImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _Movies implements Movies {
+abstract class _Movies extends Movies {
   const factory _Movies(
       {final int id,
       final List<Movie> movies,
@@ -272,8 +257,7 @@ abstract class _Movies implements Movies {
       final int totalPages,
       final int totalResults,
       final bool cached}) = _$MoviesImpl;
-
-  factory _Movies.fromJson(Map<String, dynamic> json) = _$MoviesImpl.fromJson;
+  const _Movies._() : super._();
 
   @override
   int get id;
